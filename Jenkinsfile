@@ -1,20 +1,23 @@
 pipeline {
+   environment {
+    registry = "vijaylokesh/rama"
+    registryCredential = 'docker-hub'
+    dockerImage = ''
+    }
   agent {
-    dockerfile {
-      filename 'Dockerfile'
+    label 'docker_slave1'
+  } 
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/ravirekha/pipeline-project.git'
+      }
+    }
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":latest"
+        }
+      }
     }
 
-  }
-  stages {
-    stage('build') {
-      steps {
-        sh 'echo " build is run"'
-      }
-    }
-    stage('cloud') {
-      steps {
-        sh 'echo " hai"'
-      }
-    }
-  }
-}
