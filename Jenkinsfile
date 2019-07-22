@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/ravirekha/pipeline-project.git'
+        git 'https://github.com/Vijaylokesh/rama.git'
       }
     }
     stage('Building image') {
